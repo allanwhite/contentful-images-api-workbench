@@ -8,7 +8,8 @@
     { label: 'Original', params: '?w=1000' },
     { label: 'WebP', params: '?w=1000&fm=webp' },
     { label: 'Scaled WebP', params: '?w=600&fm=webp&q=50' },
-    { label: 'AVIF', params: '?w=600&fm=avif&q=50' }
+    { label: 'AVIF', params: '?w=600&fm=avif&q=50' },
+    { label: 'Crop: Face', params: '?fit=thumb&w=480&h=480&f=face&fm=webp' }
   ];
 
   const baseFormat = baseImageUrl.split('.').pop().toUpperCase();
@@ -61,36 +62,35 @@
 
 <main>
   <header class="page-header">
-    <h1>Contentful Image Variations</h1>
-    <p>Compare format and compression options delivered by the Contentful Images API.</p>
+    <h1>Contentful Images API Variations</h1>
+    <p>These images are already delivered with the <a href='https://www.contentful.com/developers/docs/references/images-api/'>Contentful Image API</a>, so we can easily optimize them to save bandwidth with a few appropriate parameters.</p>
   </header>
 
   <section class="grid">
     {#each entries as entry}
       <article class="card">
-        <div class="image-wrapper">
-          <img src={entry.url} alt={`${entry.label} variation`} loading="lazy" />
-        </div>
         <div class="card-body">
-          <h2>{entry.label}</h2>
+          <h3>
+            <a class="link" href={entry.url} target="_blank" rel="noreferrer">
+            {entry.label}
+            </a>
+          </h3>
           <dl>
-            <div>
-              <dt>Format</dt>
-              <dd>{entry.format}</dd>
-            </div>
-            <div>
-              <dt>Size</dt>
-              <dd>
+            <dt class="metadata">Format: {entry.format}</dt>
+            <dt class="metadata">Size: 
                 {#if entry.size !== null}
                   {entry.size.toFixed(2)} KB
                 {:else}
                   <span class="muted">Not available</span>
                 {/if}
-              </dd>
-            </div>
+            </dt>
+            <dt class="metadata">Params: {entry.params}</dt>
           </dl>
-          <a class="link" href={entry.url} target="_blank" rel="noreferrer">Open image</a>
         </div>
+        <div class="image-wrapper">
+          <img src={entry.url} alt={`${entry.label} variation`} loading="lazy" />
+        </div>
+
       </article>
     {/each}
   </section>
@@ -98,7 +98,7 @@
 
 <style>
   main {
-    max-width: 1200px;
+    /* max-width: 1200px; */
     margin: 0 auto;
     padding: 2rem 1.5rem 4rem;
   }
@@ -123,46 +123,49 @@
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
     gap: 1.5rem;
   }
 
   .card {
-    background: #ffffff;
-    border-radius: 16px;
+    /* background-color: #36383e; */
+    border-radius: 0.5rem;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+    /* box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12); */
     display: flex;
     flex-direction: column;
   }
 
-  .image-wrapper {
-    position: relative;
-    padding-top: 60%;
+.image-wrapper {
     overflow: hidden;
+    border-radius: 0.5rem;
+    object-fit: contain;
+    padding: 1.5rem
   }
 
-  .image-wrapper img {
+  /* .image-wrapper img {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-  }
+    
+  } */
 
   .card-body {
     padding: 1.25rem 1.5rem 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    /* color: white; */
   }
 
-  h2 {
+  h3 {
     margin: 0;
     font-size: 1.25rem;
-    color: #0f172a;
   }
-
+  .card-body .link {
+    color: #1f2831;
+  }
   dl {
     margin: 0;
     display: grid;
@@ -171,12 +174,20 @@
 
   dt {
     font-weight: 600;
-    color: #1e293b;
+    /* color: #1e293b; */
   }
 
   dd {
     margin: 0.25rem 0 0;
-    color: #334155;
+    /* color: #334155; */
+  }
+  .metadata {
+    font-weight: 500;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: smaller;
+    /* color: #202936; */
+    line-height: 1.1;
+    margin-bottom: 0;
   }
 
   .muted {
@@ -186,7 +197,7 @@
   .link {
     align-self: flex-start;
     font-weight: 600;
-    color: #2563eb;
+    /* color: #2563eb; */
     text-decoration: none;
   }
 

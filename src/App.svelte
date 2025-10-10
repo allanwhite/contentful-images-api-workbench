@@ -155,6 +155,7 @@
       <p class="text-sm mb-6">
         Watch this for a solid walkthrough of how to tune images with the Contentful Image API.
       </p>
+      <!-- svelte-ignore a11y-missing-attribute -->
       <iframe width="560" height="315" src="https://www.youtube.com/embed/DIWWCAJOkbU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </section>
 </main>

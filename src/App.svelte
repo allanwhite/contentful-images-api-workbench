@@ -118,6 +118,16 @@
             {entry.label}
             </a>
           </h3>
+        </div>
+        <div class="image-wrapper">
+          <img
+            class={entry.xtraClasses || undefined}
+            src={entry.url}
+            alt={`${entry.label} variation`}
+            loading="lazy"
+          />
+        </div>
+        <div class="card-body">
           <dl>
             <dt class="metadata">Format: {entry.format}</dt>
             <dt class="metadata">Size: 
@@ -128,19 +138,24 @@
                 {/if}
             </dt>
             <dt class="metadata">Params: {entry.params}</dt>
-            {#if entry.notes}
-              <dt class="metadata">
-                <p>{entry.notes}</p>
-              </dt>
-            {/if}
           </dl>
-        </div>
-        <div class="image-wrapper">
-          <img src={entry.url} alt={`${entry.label} variation`} loading="lazy" />
+          {#if entry.notes}
+              <p>{entry.notes}</p>
+          {/if}
         </div>
 
       </article>
     {/each}
+  </section>
+  <section>
+    <h2>Image API Overview</h2>
+      <p>
+        Here's a <a href="https://www.contentful.com/blog/creator-guide-to-image-file-formats-and-why-they-are-important/">blog post</a> that describes working with the Images API.
+      </p>
+      <p class="text-sm mb-6">
+        Watch this for a solid walkthrough of how to tune images with the Contentful Image API.
+      </p>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/DIWWCAJOkbU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </section>
 </main>
 
@@ -150,12 +165,14 @@
     margin: 0 auto;
     padding: 2rem 1.5rem 4rem;
   }
-
+  .pad-lg {
+    padding: var(--pad-lg);
+  }
   .page-header {
     text-align: center;
     margin-bottom: 2rem;
     display: grid;
-    gap: 1.5rem;
+    gap: var(--pad-lg);
   }
 
   .page-header h1 {
@@ -221,8 +238,9 @@
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+    /* gap: var(--pad-lg); */
+    gap: 0;
   }
 
   .card {
@@ -232,13 +250,17 @@
     /* box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12); */
     display: flex;
     flex-direction: column;
+    padding: var(--pad-lg);
   }
-
-  .image-wrapper {
-    overflow: hidden;
+  .card > div { /* add padding below each child div */
+    margin-bottom: var(--pad-lg);
+  }
+  /* .image-wrapper {
+    padding-top: 0;
+  } */
+  .image-wrapper img {
     border-radius: 0.5rem;
-    object-fit: contain;
-    padding: 1.5rem;
+    max-width: 100%;
   }
 
   /* .image-wrapper img {
@@ -250,7 +272,6 @@
   } */
 
   .card-body {
-    padding: 1.25rem 1.5rem 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
@@ -279,7 +300,7 @@
     margin: 0.25rem 0 0;
   } */
   .loading-blur {
-    filter: blur(30px);
+    filter: blur(15px);
     min-width: 400px;
   }
   .metadata {

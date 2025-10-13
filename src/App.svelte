@@ -42,6 +42,33 @@
   $: void updateEntries(baseImageUrl);
 </script>
 
+<svelte:head>
+  <title>Contentful Images API Explorer</title>
+  <meta
+    name="description"
+    content="Compare compression and scaling presets side-by-side with Contentful's Images API explorer."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Contentful Images API Explorer" />
+  <meta
+    property="og:description"
+    content="Compare compression and scaling presets side-by-side with Contentful's Images API explorer."
+  />
+  <meta property="og:image" content="/og/contentful-images-api-explorer.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="628" />
+  <meta property="og:image:alt" content="Contentful Images API Explorer comparison preview" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contentful Images API Explorer" />
+  <meta
+    name="twitter:description"
+    content="Compare compression and scaling presets side-by-side with Contentful's Images API explorer."
+  />
+  <meta name="twitter:image" content="/og/contentful-images-api-explorer.jpg" />
+  <meta name="twitter:image:alt" content="Contentful Images API Explorer comparison preview" />
+</svelte:head>
+
 <main>
   <header class="page-header">
     <h1>Contentful Images API Variations</h1>

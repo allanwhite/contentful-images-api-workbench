@@ -11,6 +11,8 @@
     }
     --light-base: oklch(94.611% 0.00011 271.152);
     --dark-base: oklch(16.516% 0.00626 285.66);
+    --light-tint: color-mix(in srgb, var(--dark-base) 5%, transparent);
+    --dark-tint: color-mix(in srgb, var(--light-base) 5%, transparent);
     --background: light-dark(var(--light-base), var(--dark-base));
     --text: light-dark(var(--dark-base),var(--light-base));
     --label-text: light-dark(var(--light-base),var(--dark-base)); /* inverting for button labels */
@@ -107,6 +109,12 @@
     font-size: clamp(2rem, 3vw, 2.75rem);
   }
   */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text);
+    margin: 0;
+    font-weight: 600;
+    line-height: 1.1;
+  }
   p { 
     color: var(--text);
   }

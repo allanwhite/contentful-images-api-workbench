@@ -53,6 +53,12 @@
         margin-bottom: 0;
       }
     }
+    &:hover {
+      /* background-color: color-mix(in srgb, var(--background) 88%, transparent); */
+      background: light-dark(var(--light-tint), var(--dark-tint));
+    }
+    transition-property: opacity, background-color;
+    transition-duration: 160ms;
   }
 
   .card-body {

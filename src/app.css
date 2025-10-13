@@ -11,8 +11,8 @@
     }
     --light-base: oklch(94.611% 0.00011 271.152);
     --dark-base: oklch(16.516% 0.00626 285.66);
-    --light-tint: color-mix(in srgb, var(--dark-base) 5%, transparent);
-    --dark-tint: color-mix(in srgb, var(--light-base) 5%, transparent);
+    --light-tint: color-mix(in srgb, var(--dark-base) 10%, transparent);
+    --dark-tint: color-mix(in srgb, var(--light-base) 10%, transparent);
     --background: light-dark(var(--light-base), var(--dark-base));
     --text: light-dark(var(--dark-base),var(--light-base));
     --label-text: light-dark(var(--light-base),var(--dark-base)); /* inverting for button labels */
@@ -37,7 +37,9 @@
     filter: blur(15px);
     min-width: 400px;
   }
-
+  .muted {
+    opacity: 0.7;
+  }
   .text-sm {
     font-size: 0.875rem;
   }
@@ -118,8 +120,12 @@
   p { 
     color: var(--text);
   }
+  ::selection {
+    background-color: var(--color-primary);
+    color: var(--label-text);
+  }
   .metadata {
-    font-weight: 500;
+    font-weight: 400;
     font-family: 'IBM Plex Mono', monospace;
     font-size: smaller;
   }

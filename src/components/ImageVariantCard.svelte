@@ -5,7 +5,7 @@
 <article class="card">
   <div class="card-body">
     <h3>
-      <a class="link" href={entry.url} target="_blank" rel="noreferrer">
+      <a class="link" href={entry.url} target="_blank" rel="noreferrer" title="Open image in new tab">
         {entry.label}
       </a>
     </h3>
@@ -42,7 +42,7 @@
 
 <style>
   .card {
-    border-radius: 0.5rem;
+    border-radius: 1rem;
     overflow: hidden;
     display: flex;
     flex-direction: column;

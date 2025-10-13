@@ -14,11 +14,5 @@
     margin-top: var(--pad-xl);
     display: grid;
     gap: var(--pad-md);
-    & h2 {
-      margin: 0;
-      color: var(--color-heading);
-    }
   }
-
-
 </style>

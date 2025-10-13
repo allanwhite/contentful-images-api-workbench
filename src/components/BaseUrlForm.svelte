@@ -37,7 +37,6 @@
 
   .form-label {
     font-weight: 600;
-    color: var(--color-heading);
   }
 
   .form-controls {

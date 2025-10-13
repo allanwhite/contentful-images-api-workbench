@@ -5,7 +5,7 @@
 <article class="card">
   <div class="card-body">
     <h3>
-      <a class="link" href={entry.url} target="_blank" rel="noreferrer">
+      <a class="link" href={entry.url} target="_blank" rel="noreferrer" title="Open image in new tab">
         {entry.label}
       </a>
     </h3>
@@ -42,24 +42,32 @@
 
 <style>
   .card {
-    border-radius: 0.5rem;
+    border-radius: 1rem;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     padding: var(--pad-lg);
-    text-align: left;
     & > div {
       margin-bottom: var(--pad-lg);
         &:last-child {
         margin-bottom: 0;
       }
     }
+    &:hover {
+      /* background-color: color-mix(in srgb, var(--background) 88%, transparent); */
+      background: light-dark(var(--light-tint), var(--dark-tint));
+    }
+    transition-property: opacity, background-color;
+    transition-duration: 160ms;
   }
 
   .card-body {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    /* gap: 0.75rem; */
+    & h3 {
+      margin-bottom: 0;
+    }
   }
 
   .image-wrapper img {
@@ -69,20 +77,12 @@
   .image-wrapper .image-avatar{
     border-radius: 50%;
     max-width: 50%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-  }
 
-  h3 {
-    margin: 0;
-    font-size: 1.25rem;
   }
 
   dl {
-    margin: 0;
     display: grid;
-    gap: 0.5rem;
+    gap: 0.3rem;
   }
 
   dt {

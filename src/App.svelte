@@ -53,22 +53,23 @@
     {#each entries as entry (entry.url)}
       <ImageVariantCard {entry} />
     {/each}
+    <InfoPanel title="Image API Overview">
+      <p>
+        Here's a <a href="https://www.contentful.com/blog/creator-guide-to-image-file-formats-and-why-they-are-important/">blog post</a> that describes working with the Images API.
+      </p>
+      <p class="text-sm mb-6">
+        Watch this for a solid walkthrough of how to tune images with the Contentful Image API.
+      </p>
+      <!-- svelte-ignore a11y-missing-attribute -->
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/DIWWCAJOkbU"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </InfoPanel>
+
   </section>
-  <InfoPanel title="Image API Overview">
-    <p>
-      Here's a <a href="https://www.contentful.com/blog/creator-guide-to-image-file-formats-and-why-they-are-important/">blog post</a> that describes working with the Images API.
-    </p>
-    <p class="text-sm mb-6">
-      Watch this for a solid walkthrough of how to tune images with the Contentful Image API.
-    </p>
-    <!-- svelte-ignore a11y-missing-attribute -->
-    <iframe
-      width="560"
-      height="315"
-      src="https://www.youtube.com/embed/DIWWCAJOkbU"
-      frameborder="0"
-      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-    ></iframe>
-  </InfoPanel>
 </main>

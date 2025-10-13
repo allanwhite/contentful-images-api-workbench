@@ -19,6 +19,7 @@ body {
   min-height: 100vh;
   background-color: var(--color-background);
   color: var(--color-text);
+  text-align: left;
 }
 
 * {
@@ -36,19 +37,24 @@ main {
   display: grid;
   gap: var(--pad-lg);
 }
-
-.page-header h1 {
+h1 {
   margin: 0;
   font-size: clamp(2rem, 3vw, 2.75rem);
   color: var(--color-heading);
 }
-
-.page-header p {
+p {
   margin: 0.75rem auto 0;
   max-width: 40rem;
   color: var(--color-subtle-text);
   font-size: 1rem;
   line-height: 1.6;
+}
+.metadata {
+  font-weight: 500;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: smaller;
+  line-height: 1.1;
+  margin-bottom: 0;
 }
 
 button {
@@ -59,16 +65,14 @@ button {
   color: white;
   font-weight: 600;
   cursor: pointer;
-}
-
-button:hover,
-button:focus {
-  background-color: var(--color-primary-hover);
+  &:hover, &:focus {
+    background-color: var(--color-primary-hover);
+  }
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
   gap: var(--pad-lg);
 }
 
@@ -77,19 +81,12 @@ button:focus {
   font-weight: 600;
   color: var(--color-card-link);
   text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
-.link:hover {
-  text-decoration: underline;
-}
 
-.metadata {
-  font-weight: 500;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: smaller;
-  line-height: 1.1;
-  margin-bottom: 0;
-}
 
 .muted {
   color: var(--color-muted);

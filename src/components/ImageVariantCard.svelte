@@ -47,14 +47,12 @@
     display: flex;
     flex-direction: column;
     padding: var(--pad-lg);
-  }
-
-  .card > div {
-    margin-bottom: var(--pad-lg);
-  }
-
-  .card > div:last-child {
-    margin-bottom: 0;
+    & > div {
+      margin-bottom: var(--pad-lg);
+        &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 
   .card-body {

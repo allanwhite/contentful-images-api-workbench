@@ -2,6 +2,7 @@
   import BaseUrlForm from './components/BaseUrlForm.svelte';
   import ImageVariantCard from './components/ImageVariantCard.svelte';
   import InfoPanel from './components/InfoPanel.svelte';
+  import ThemeToggle from './components/ThemeToggle.svelte';
   import { buildVariantEntries, hydrateVariantSizes } from './lib/imageVariants.js';
 
   let baseImageUrl =
@@ -41,39 +42,18 @@
 
   $: void updateEntries(baseImageUrl);
 
-  // Theme switcher
-  const html = document.querySelector("html");
-  const mode = localStorage.getItem("mode");
-
-  if (mode === "light") switchLight();
-  if (mode === "dark") switchDark();
-
-  function switchAuto() {
-    html.style.setProperty("color-scheme", "light dark");
-    localStorage.removeItem("mode");
-  }
-
-  function switchLight() {
-    html.style.setProperty("color-scheme", "light");
-    localStorage.setItem("mode", "light");
-  }
-
-  function switchDark() {
-    html.style.setProperty("color-scheme", "dark");
-    localStorage.setItem("mode", "dark");
-  }
 </script>
 
 <main>
-  <nav class="nav">
-    <div class="nav-group">
-        <button class="ui-button" id="autoSwitch" type="button" onclick="switchAuto()">Auto</button>
-        <button class="ui-button" id="lightSwitch" type="button" onclick="switchLight()">Light</button>
-        <button class="ui-button" id="darkSwitch" type="button" onclick="switchDark()">Dark</button>
-    </div>
-  </nav>
+        <nav class="nav">
+          <div class="nav-group">
+            <ThemeToggle />
+          </div>
+        </nav>
   <header class="page-header">
-    <h1>Contentful Images API Variations</h1>
+    <div class="title">
+        <h1 class="float-left">Contentful Images API Variations</h1>
+    </div>
     <p>These images are already delivered with the <a href='https://www.contentful.com/developers/docs/references/images-api/'>Contentful Image API</a>, so we can easily optimize them to save bandwidth with a few appropriate parameters.</p>
     <BaseUrlForm bind:value={imageUrlInput} on:submit={handleUrlSubmit} />
   </header>
@@ -82,23 +62,26 @@
     {#each entries as entry (entry.url)}
       <ImageVariantCard {entry} />
     {/each}
-    <InfoPanel title="Image API Overview">
-      <p>
-        Here's a <a href="https://www.contentful.com/blog/creator-guide-to-image-file-formats-and-why-they-are-important/">blog post</a> that describes working with the Images API.
-      </p>
-      <p class="text-sm mb-6">
-        Watch this for a solid walkthrough of how to tune images with the Contentful Image API.
-      </p>
-      <!-- svelte-ignore a11y-missing-attribute -->
-      <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/DIWWCAJOkbU"
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
-    </InfoPanel>
-
+    <article class="card padding-lg">
+      <!-- <div class="card-body"> -->
+        <h3>Images API Overview</h3>
+        <p>
+          Here's a <a href="https://www.contentful.com/blog/creator-guide-to-image-file-formats-and-why-they-are-important/">blog post</a> that describes working with the Images API.
+        </p>
+        <p class="">
+          Watch this for a solid walkthrough of how to tune images with the Contentful Image API.
+        </p>
+        <!-- svelte-ignore a11y-missing-attribute -->
+        <iframe
+          class="aspect-video"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/DIWWCAJOkbU"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      <!-- </div> -->
+    </article>
   </section>
 </main>

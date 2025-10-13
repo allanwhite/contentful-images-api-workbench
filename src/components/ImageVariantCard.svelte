@@ -58,7 +58,10 @@
   .card-body {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    /* gap: 0.75rem; */
+    & h3 {
+      margin-bottom: 0;
+    }
   }
 
   .image-wrapper img {
@@ -73,7 +76,7 @@
 
   dl {
     display: grid;
-    gap: 0.5rem;
+    gap: 0.3rem;
   }
 
   dt {

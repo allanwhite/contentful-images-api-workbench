@@ -18,7 +18,7 @@
       id="base-url-input"
       class="url-input"
       type="url"
-      placeholder="https://images.ctfassets.net/..."
+      placeholder="Image URL..."
       bind:value
       required
     />

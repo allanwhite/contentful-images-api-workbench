@@ -47,6 +47,7 @@
     display: flex;
     flex-direction: column;
     padding: var(--pad-lg);
+    text-align: left;
     & > div {
       margin-bottom: var(--pad-lg);
         &:last-child {
@@ -64,6 +65,13 @@
   .image-wrapper img {
     border-radius: 0.5rem;
     max-width: 100%;
+  }
+  .image-wrapper .image-avatar{
+    border-radius: 50%;
+    max-width: 50%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
   }
 
   h3 {

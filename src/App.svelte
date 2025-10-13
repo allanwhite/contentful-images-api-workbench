@@ -50,6 +50,10 @@
   />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Contentful Images API Explorer" />
+
+  <meta property="og:url" content="your value" />
+
+  <meta property="og:type" content="website" />
   <meta
     property="og:description"
     content="Compare compression and scaling presets side-by-side with Contentful's Images API explorer."

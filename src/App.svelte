@@ -4,6 +4,18 @@
   import InfoPanel from './components/InfoPanel.svelte';
   import { buildVariantEntries, hydrateVariantSizes } from './lib/imageVariants.js';
 
+  const DEFAULT_SITE_URL = 'https://contentful-images-api-workbench.vercel.app/';
+
+  const siteUrl =
+    import.meta.env.VITE_SITE_URL ??
+    (typeof window !== 'undefined'
+      ? window.location.origin
+      : import.meta.env.DEV
+        ? 'http://localhost:5173'
+        : DEFAULT_SITE_URL);
+
+  const ogImageUrl = `${siteUrl}/og/contentful-images-api-explorer.jpg`;
+
   let baseImageUrl =
     'https://images.ctfassets.net/col7w9urljg1/121xYOJZwECsMsUxRFgKBC/af95ad09a6b2f974dca2c07ca2f552de/Fiona_at_Edgefield__sunset_02.jpg';
 
@@ -48,17 +60,14 @@
     name="description"
     content="Compare compression and scaling presets side-by-side with Contentful's Images API explorer."
   />
+  <meta property="og:url" content={siteUrl} />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Contentful Images API Explorer" />
-
-  <meta property="og:url" content="your value" />
-
-  <meta property="og:type" content="website" />
   <meta
     property="og:description"
     content="Compare compression and scaling presets side-by-side with Contentful's Images API explorer."
   />
-  <meta property="og:image" content="/og/contentful-images-api-explorer.jpg" />
+  <meta property="og:image" content={ogImageUrl} />
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="628" />
@@ -69,7 +78,7 @@
     name="twitter:description"
     content="Compare compression and scaling presets side-by-side with Contentful's Images API explorer."
   />
-  <meta name="twitter:image" content="/og/contentful-images-api-explorer.jpg" />
+  <meta name="twitter:image" content={ogImageUrl} />
   <meta name="twitter:image:alt" content="Contentful Images API Explorer comparison preview" />
 </svelte:head>
 

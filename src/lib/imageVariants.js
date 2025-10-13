@@ -1,5 +1,5 @@
 export const variationPresets = [
-  { label: 'Original', params: '?w=1000', notes: '', xtraClasses: '' },
+  { label: 'Original', params: '?w=1000', notes: 'Image ©Copyright R. Allan White 2025', xtraClasses: '' },
   { label: 'WebP', params: '?w=1000&fm=webp', notes: '', xtraClasses: '' },
   {
     label: 'Scaled WebP',
@@ -23,7 +23,7 @@ export const variationPresets = [
     label: 'Crop: Face',
     params: '?fit=thumb&w=480&h=480&f=face&fm=webp',
     notes: 'You can use face or face(s) to easily generate thumbnails of people',
-    xtraClasses: ''
+    xtraClasses: 'image-avatar'
   }
 ];
 

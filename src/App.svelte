@@ -40,9 +40,38 @@
   }
 
   $: void updateEntries(baseImageUrl);
+
+  // Theme switcher
+  const html = document.querySelector("html");
+  const mode = localStorage.getItem("mode");
+
+  if (mode === "light") switchLight();
+  if (mode === "dark") switchDark();
+
+  function switchAuto() {
+    html.style.setProperty("color-scheme", "light dark");
+    localStorage.removeItem("mode");
+  }
+
+  function switchLight() {
+    html.style.setProperty("color-scheme", "light");
+    localStorage.setItem("mode", "light");
+  }
+
+  function switchDark() {
+    html.style.setProperty("color-scheme", "dark");
+    localStorage.setItem("mode", "dark");
+  }
 </script>
 
 <main>
+  <nav class="nav">
+    <div class="nav-group">
+        <button class="ui-button" id="autoSwitch" type="button" onclick="switchAuto()">Auto</button>
+        <button class="ui-button" id="lightSwitch" type="button" onclick="switchLight()">Light</button>
+        <button class="ui-button" id="darkSwitch" type="button" onclick="switchDark()">Dark</button>
+    </div>
+  </nav>
   <header class="page-header">
     <h1>Contentful Images API Variations</h1>
     <p>These images are already delivered with the <a href='https://www.contentful.com/developers/docs/references/images-api/'>Contentful Image API</a>, so we can easily optimize them to save bandwidth with a few appropriate parameters.</p>

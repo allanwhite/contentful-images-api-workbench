@@ -1,8 +1,16 @@
 <script>
-  let transformOrigin = '50% 50%';
   export let entry;
 
-  function handlePointerMove(event) {
+  let transformOrigin = '50% 50%';
+  let zoomed = false;
+  let resetTimer;
+  let originResetTimer;
+
+  function positionToOrigin(event) {
+    if (!('clientX' in event) || !('clientY' in event)) {
+      transformOrigin = '50% 50%';
+      return;
+    }
     const wrapper = event.currentTarget;
     const rect = wrapper.getBoundingClientRect();
     const x = ((event.clientX - rect.left) / rect.width) * 100;
@@ -10,8 +18,68 @@
     transformOrigin = `${x.toFixed(2)}% ${y.toFixed(2)}%`;
   }
 
+  function clearResetTimer() {
+    if (resetTimer) {
+      clearTimeout(resetTimer);
+      resetTimer = undefined;
+    }
+    if (originResetTimer) {
+      clearTimeout(originResetTimer);
+      originResetTimer = undefined;
+    }
+  }
+
+  function scheduleReset() {
+    clearResetTimer();
+    resetTimer = setTimeout(() => {
+      zoomed = false;
+      originResetTimer = setTimeout(() => {
+        transformOrigin = '50% 50%';
+        originResetTimer = undefined;
+      }, 220);
+      resetTimer = undefined;
+    }, 300);
+  }
+
+  function handlePointerMove(event) {
+    if (!zoomed) return;
+    positionToOrigin(event);
+  }
+
+  function toggleZoom(event) {
+    clearResetTimer();
+    positionToOrigin(event);
+    zoomed = !zoomed;
+    if (!zoomed) {
+      originResetTimer = setTimeout(() => {
+        transformOrigin = '50% 50%';
+        originResetTimer = undefined;
+      }, 220);
+    }
+  }
+
   function handlePointerLeave() {
-    transformOrigin = '50% 50%';
+    if (zoomed) {
+      scheduleReset();
+    } else {
+      transformOrigin = '50% 50%';
+    }
+  }
+
+  function handleKeydown(event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleZoom(event);
+    }
+    if (event.key === 'Escape') {
+      scheduleReset();
+    }
+  }
+
+  function handleBlur() {
+    if (zoomed) {
+      scheduleReset();
+    }
   }
 </script>
 
@@ -26,8 +94,17 @@
 
   <div
     class="image-wrapper"
+    role="button"
+    tabindex="0"
+    aria-pressed={zoomed}
+    class:zoomed
     on:pointermove={handlePointerMove}
+    on:pointerdown={toggleZoom}
     on:pointerleave={handlePointerLeave}
+    on:pointerenter={clearResetTimer}
+    on:focus={clearResetTimer}
+    on:blur={handleBlur}
+    on:keydown={handleKeydown}
   >
     <img
       class={`${entry.xtraClasses ? `${entry.xtraClasses} ` : ''}preview`}
@@ -93,24 +170,26 @@
     overflow: hidden;
     border-radius: 0.75rem;
   }
-  .image-wrapper:hover {
-    cursor: zoom-in;
-  }
-
   .preview {
     width: 100%;
     display: block;
     border-radius: inherit;
-    transition: transform 220ms ease-out;
+    transition: transform 200ms ease-out;
   }
 
-  @media (hover: hover) {
-    .image-wrapper:hover .preview,
-    .image-wrapper:focus-within .preview {
-      transform: scale(3);
-      transition-delay: 800ms;
-    }
+  .image-wrapper.zoomed {
+    cursor: zoom-out;
   }
+
+  .image-wrapper:not(.zoomed) {
+    cursor: zoom-in;
+  }
+
+  .image-wrapper.zoomed .preview {
+    transform: scale(3);
+    transition-delay: 300ms;
+  }
+
   .image-wrapper .image-avatar{
     border-radius: 50%;
     max-width: 50%;

@@ -1,5 +1,18 @@
 <script>
+  let transformOrigin = '50% 50%';
   export let entry;
+
+  function handlePointerMove(event) {
+    const wrapper = event.currentTarget;
+    const rect = wrapper.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+    transformOrigin = `${x.toFixed(2)}% ${y.toFixed(2)}%`;
+  }
+
+  function handlePointerLeave() {
+    transformOrigin = '50% 50%';
+  }
 </script>
 
 <article class="card">
@@ -11,12 +24,17 @@
     </h3>
   </div>
 
-  <div class="image-wrapper">
+  <div
+    class="image-wrapper"
+    on:pointermove={handlePointerMove}
+    on:pointerleave={handlePointerLeave}
+  >
     <img
-      class={entry.xtraClasses || undefined}
+      class={`${entry.xtraClasses ? `${entry.xtraClasses} ` : ''}preview`}
       src={entry.url}
       alt={`${entry.label} variation`}
       loading="lazy"
+      style={`transform-origin: ${transformOrigin};`}
     />
   </div>
 
@@ -70,14 +88,32 @@
     }
   }
 
-  .image-wrapper img {
-    border-radius: 0.5rem;
-    max-width: 100%;
+  .image-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.75rem;
+  }
+  .image-wrapper:hover {
+    cursor: zoom-in;
+  }
+
+  .preview {
+    width: 100%;
+    display: block;
+    border-radius: inherit;
+    transition: transform 220ms ease-out;
+  }
+
+  @media (hover: hover) {
+    .image-wrapper:hover .preview,
+    .image-wrapper:focus-within .preview {
+      transform: scale(3);
+      transition-delay: 800ms;
+    }
   }
   .image-wrapper .image-avatar{
     border-radius: 50%;
     max-width: 50%;
-
   }
 
   dl {

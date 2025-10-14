@@ -1,6 +1,5 @@
 export const variationPresets = [
   { label: 'Original', params: '?w=1000', notes: 'Image ©Copyright R. Allan White 2025', xtraClasses: '' },
-  { label: 'WebP', params: '?w=1000&fm=webp', notes: '', xtraClasses: '' },
   {
     label: 'Scaled WebP',
     params: '?w=600&fm=webp&q=50',

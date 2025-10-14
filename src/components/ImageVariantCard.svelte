@@ -25,7 +25,7 @@
       <dt class="metadata">Format: {entry.format}</dt>
       <dt class="metadata">
         Size:
-        {#if entry.size !== null}
+        {#if entry.size !== null} 
           {entry.size.toFixed(2)} KB
         {:else}
           <span class="muted">Not available</span>
@@ -58,7 +58,7 @@
       background: light-dark(var(--light-tint), var(--dark-tint));
     }
     transition-property: opacity, background-color;
-    transition-duration: 160ms;
+    transition-duration: 300ms;
   }
 
   .card-body {

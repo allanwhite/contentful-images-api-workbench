@@ -10,9 +10,11 @@
       color-scheme: dark;
     }
     --light-base: oklch(94.611% 0.00011 271.152);
-    --dark-base: oklch(16.516% 0.00626 285.66);
-    --light-tint: color-mix(in srgb, var(--dark-base) 10%, transparent);
-    --dark-tint: color-mix(in srgb, var(--light-base) 10%, transparent);
+    --dark-base: oklch(19.706% 0.00598 285.792);
+    /* --light-tint: color-mix(in srgb, var(--light-base) 90%, transparent);
+    --dark-tint: color-mix(in srgb, var(--dark-base) 90%, transparent); */
+    --light-tint: white;
+    --dark-tint: black;
     --background: light-dark(var(--light-base), var(--dark-base));
     --text: light-dark(var(--dark-base),var(--light-base));
     --label-text: light-dark(var(--light-base),var(--dark-base)); /* inverting for button labels */

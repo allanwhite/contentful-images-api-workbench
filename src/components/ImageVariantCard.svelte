@@ -4,6 +4,7 @@
   let transformOrigin = '50% 50%';
   let zoomed = false;
   let resetTimer;
+  let originResetTimer;
 
   function positionToOrigin(event) {
     if (!('clientX' in event) || !('clientY' in event)) {
@@ -22,13 +23,21 @@
       clearTimeout(resetTimer);
       resetTimer = undefined;
     }
+    if (originResetTimer) {
+      clearTimeout(originResetTimer);
+      originResetTimer = undefined;
+    }
   }
 
   function scheduleReset() {
     clearResetTimer();
     resetTimer = setTimeout(() => {
       zoomed = false;
-      transformOrigin = '50% 50%';
+      originResetTimer = setTimeout(() => {
+        transformOrigin = '50% 50%';
+        originResetTimer = undefined;
+      }, 220);
+      resetTimer = undefined;
     }, 300);
   }
 
@@ -42,7 +51,10 @@
     positionToOrigin(event);
     zoomed = !zoomed;
     if (!zoomed) {
-      transformOrigin = '50% 50%';
+      originResetTimer = setTimeout(() => {
+        transformOrigin = '50% 50%';
+        originResetTimer = undefined;
+      }, 220);
     }
   }
 
@@ -175,7 +187,7 @@
 
   .image-wrapper.zoomed .preview {
     transform: scale(3);
-    transition-delay: 100ms;
+    transition-delay: 300ms;
   }
 
   .image-wrapper .image-avatar{

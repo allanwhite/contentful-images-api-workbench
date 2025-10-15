@@ -56,7 +56,8 @@
   .base-url-form {
     display: grid;
     gap: 0.5rem;
-    width: minmax(20ch, 75ch);
+    width: 100%;
+    min-width: 10ch;
     margin: 0 auto;
     /* text-align: left; */
   }
@@ -68,7 +69,12 @@
   .form-controls {
     display: flex;
     gap: 0.75rem;
-    align-items: center;
+    flex-direction: column;
+    align-items: start;
+    @media (min-width: 480px) {
+      flex-direction: row;
+      align-items: center;
+    }
   }
 
   .thumbnail {

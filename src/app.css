@@ -159,12 +159,12 @@
   .form-and-samples {
     display: grid;
     gap: var(--pad-md);
-    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
     width: 100%;
     @media (min-width: 1200px) {
       grid-template-columns: minmax(0, 1fr) auto;
       align-items: start;
-      width: auto;
+      max-width: 140ch;
     }
   }
 

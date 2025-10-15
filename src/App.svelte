@@ -78,7 +78,9 @@
   }
 
 </script>
-
+<svelte:head>
+  <link rel="preload" as="image" href={sampleImages[0]} />
+</svelte:head>
 <main>
         <nav class="nav">
           <div class="nav-group">

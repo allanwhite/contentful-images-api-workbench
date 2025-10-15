@@ -5,16 +5,14 @@
   import ThemeToggle from './components/ThemeToggle.svelte';
   import { buildVariantEntries, hydrateVariantSizes } from './lib/imageVariants.js';
 
-  let baseImageUrl =
-    'https://images.ctfassets.net/col7w9urljg1/121xYOJZwECsMsUxRFgKBC/af95ad09a6b2f974dca2c07ca2f552de/Fiona_at_Edgefield__sunset_02.jpg';
-
   const sampleImages = [
+    'https://images.ctfassets.net/col7w9urljg1/121xYOJZwECsMsUxRFgKBC/af95ad09a6b2f974dca2c07ca2f552de/Fiona_at_Edgefield__sunset_02.jpg',
     'https://images.ctfassets.net/col7w9urljg1/4KLYjZa69Q53hbNyKVydbf/828c7d82f9d789c80c1491ddd816634e/pantone-pdp-desktop.jpg',
     'https://images.ctfassets.net/col7w9urljg1/75IchOd2VYWMV2hqf1k6jJ/1bc5103697b4e29b1629b4150e0032ab/APC_0802.avif',
     'https://images.ctfassets.net/col7w9urljg1/2LuK12aDfND5GAEjYeVCRr/db35df0e05939b77bb3d7d35e3f6aff4/_C7A8542.avif',
     'https://images.ctfassets.net/col7w9urljg1/18x23yflPa0RNL4vW0nZIy/cef9731a43abf7ee95c60c21d3dea376/_C7A8526.avif'
   ];
-
+  let baseImageUrl = sampleImages[0];
   let entries = buildVariantEntries(baseImageUrl);
   let imageUrlInput = baseImageUrl;
   let abortController;
@@ -107,7 +105,7 @@
           {#each sampleImages as sample}
             <button
               type="button"
-              class="sample-thumb"
+              class="sample-thumb {sample === baseImageUrl ? 'selected' : ''}"
               aria-label="Use sample image"
               on:click={() => handleSampleSelect(sample)}
             >

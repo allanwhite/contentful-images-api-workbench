@@ -102,7 +102,7 @@
         on:clear={handleThumbnailClear}
       />
       <aside class="sample-list">
-        <h3 class="sample-title">Sample Assets</h3>
+        <h3 class="sample-title">Sample Assets <span id="copyright" class="muted tiny">© R. Allan White 2025</span></h3>
         <div class="sample-thumbs">
           {#each sampleImages as sample}
             <button

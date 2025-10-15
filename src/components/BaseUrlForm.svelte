@@ -24,8 +24,8 @@
 <form class="card padding-lg base-url-form bg-tint rounded-md" on:submit={handleSubmit}>
   <label class="form-label" for="base-url-input">Paste a full Contentful Asset URL</label>
   <div class="form-controls">
-    {#if showThumbnail && thumbnailUrl}
-      <div class="thumbnail" in:fade={{ duration: FAST_DURATION }} out:fade={{ duration: FAST_DURATION }}>
+    <div class="thumbnail" class:thumbnail-empty={!showThumbnail || !thumbnailUrl}>
+      {#if showThumbnail && thumbnailUrl}
         <img class="thumbnail-image" src={thumbnailUrl} alt={thumbnailAlt} loading="lazy" />
         <button
           type="button"
@@ -37,8 +37,9 @@
             <path d="M12.3 3.7a1 1 0 0 0-1.4-1.4L8 5.17 5.1 2.3A1 1 0 1 0 3.7 3.7L6.58 6.6 3.7 9.5a1 1 0 1 0 1.41 1.41L8 8l2.89 2.91a1 1 0 0 0 1.41-1.41L9.42 6.6z" />
           </svg>
         </button>
-      </div>
-    {/if}
+
+      {/if}
+    </div>
     <input
       id="base-url-input"
       class="url-input"
@@ -55,8 +56,8 @@
   .base-url-form {
     display: grid;
     gap: 0.5rem;
-    width: min(100%, 70ch);
-    /* margin: 0 auto; */
+    width: minmax(20ch, 75ch);
+    margin: 0 auto;
     /* text-align: left; */
   }
 
@@ -77,6 +78,14 @@
     flex: 0 0 auto;
     border-radius: var(--radius-sm);
     overflow: hidden;
+    display: grid;
+    place-items: center;
+    transition: border var(--transition-speed-fast) ease;
+  }
+
+  .thumbnail-empty {
+    border: 2px dashed color-mix(in srgb, var(--color-primary) 40%, transparent);
+    background: color-mix(in srgb, var(--background) 80%, transparent);
   }
 
   .thumbnail-image {
@@ -112,6 +121,13 @@
     fill: currentColor;
   }
 
+  /* .thumbnail-placeholder {
+    width: 50%;
+    height: 50%;
+    border-radius: var(--radius-sm);
+    border: 1px dashed color-mix(in srgb, var(--color-primary) 35%, transparent);
+  } */
+
   .url-input {
     flex: 1;
     padding: 0.65rem 0.75rem;
@@ -119,6 +135,9 @@
     border-radius: 0.5rem;
     font-size: 0.9rem;
     font-family: monospace;
+    @media (min-width: 960px) {
+      min-width: 30ch;
+    }
   }
 
   .url-input:focus {

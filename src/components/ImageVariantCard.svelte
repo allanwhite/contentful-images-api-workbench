@@ -85,15 +85,26 @@
 
 <article class="card">
   <div class="card-body">
-    <h3>
-      <a class="link" href={entry.url} target="_blank" rel="noreferrer" title="Open image in new tab">
-        {entry.label}
-      </a>
-    </h3>
+    <div class="metadata">
+      <h3 class="image-title">
+        <a class="link" href={entry.url} target="_blank" rel="noreferrer" title="Open image in new tab">
+          {entry.label}
+        </a>
+      </h3>
+      <div class="image-meta">
+        {#if entry.size !== null} 
+          <span class="image-size mono">{entry.size.toFixed(2)} kB</span>
+        {:else}
+          <span class="muted">(file size not available)</span>
+        {/if}
+        <span class="label-small">{entry.format}</span>
+      </div>
+    </div>
+
   </div>
 
   <div
-    class="image-wrapper"
+    class="image-wrapper loader"
     role="button"
     tabindex="0"
     aria-pressed={zoomed}
@@ -116,19 +127,10 @@
   </div>
 
   <div class="card-body">
-    <dl>
-      <dt class="metadata">Format: {entry.format}</dt>
-      <dt class="metadata">
-        Size:
-        {#if entry.size !== null} 
-          {entry.size.toFixed(2)} KB
-        {:else}
-          <span class="muted">Not available</span>
-        {/if}
-      </dt>
-      <dt class="metadata">Params: {entry.params}</dt>
-    </dl>
 
+    {#if entry.params !== ''}
+      <p>Params: <span class="mono">{entry.params}</span></p>
+    {/if}
     {#if entry.notes}
       <p>{entry.notes}</p>
     {/if}
@@ -137,7 +139,7 @@
 
 <style>
   .card {
-    border-radius: 1rem;
+    border-radius: var(--radius-lg);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -160,15 +162,19 @@
     display: flex;
     flex-direction: column;
     /* gap: 0.75rem; */
-    & h3 {
+    /* & h3 {
       margin-bottom: 0;
+    } */
+    & p {
+      margin: 0 0 0.7em 0;
+      line-height: 1.4;
     }
   }
 
   .image-wrapper {
     position: relative;
     overflow: hidden;
-    border-radius: 0.75rem;
+    border-radius: var(--radius-md);
   }
   .preview {
     width: 100%;
@@ -176,7 +182,25 @@
     border-radius: inherit;
     transition: transform 200ms ease-out;
   }
-
+  .metadata {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    & h3 {
+      margin: 0;
+      line-height: inherit;
+    }
+  }
+  .image-size {
+    font-weight: 500;
+    font-size: larger;
+    margin-right: 0.5rem;
+  }
+  .image-meta {
+    display: inline-flex;
+  }
   .image-wrapper.zoomed {
     cursor: zoom-out;
   }
@@ -194,7 +218,7 @@
     border-radius: 50%;
     max-width: 50%;
   }
-
+/* 
   dl {
     display: grid;
     gap: 0.3rem;
@@ -202,5 +226,5 @@
 
   dt {
     font-weight: 600;
-  }
+  } */
 </style>

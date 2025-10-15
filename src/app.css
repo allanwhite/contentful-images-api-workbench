@@ -26,6 +26,9 @@
     --pad-md: 1rem;
     --pad-lg: 1.5rem;
     --pad-xl: 3rem;
+
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
   }
 }
 @layer utilities {
@@ -36,7 +39,7 @@
     float: right;
   }
   .loading-blur {
-    filter: blur(15px);
+    filter: blur(25px);
     min-width: 400px;
   }
   .muted {
@@ -45,7 +48,12 @@
   .text-sm {
     font-size: 0.875rem;
   }
-
+  .mono {
+    font-family: ui-monospace, SFMono-Regular, monospace;
+  }
+  .loader {
+    background-image: linear-gradient(135deg, #7c7c7c98 2.42%, rgba(124, 124, 124, 0.00) 75%);
+  }
   /* .mb-md {
     margin-bottom: calc(var(--pad-md) * 1.5);
   }
@@ -58,6 +66,35 @@
   }
    .aspect-video {
     aspect-ratio: 16 / 9;
+  }
+  .bg-tint {
+    background-color: light-dark(var(--light-tint), var(--dark-tint));
+  }
+  .rounded-md {
+    border-radius: var(--radius-md);
+  }
+  button {
+    padding: 0.65rem 1.25rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--color-primary);
+    color: var(--label-text);
+    font-weight: 600;
+    cursor: pointer;
+    &:hover, &:focus {
+      background-color: var(--color-accent);
+    }
+  }
+  .label-small {
+    padding: 0.2rem 0.4rem;
+    --label-color: color-mix(in srgb, var(--text), transparent 30%);
+    border: 1px solid var(--label-color);
+    border-radius: 0.25rem;
+    background: light-dark(var(--light-tint), var(--dark-tint));
+    font-size: smaller;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--label-color);
   }
 }
 @layer {
@@ -102,10 +139,10 @@
   }
   .page-header {
     /* text-align: center; */
-    padding: var(--pad-md);
+    padding: var(--pad-lg);
     /* margin-bottom: var(--pad-xl); */
     display: grid;
-    gap: 0;
+    gap: 1rem;
     place-items: start;
   }
   /* h1 {
@@ -125,24 +162,6 @@
   ::selection {
     background-color: var(--color-primary);
     color: var(--label-text);
-  }
-  .metadata {
-    font-weight: 400;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: smaller;
-  }
-
-  button {
-    padding: 0.65rem 1.25rem;
-    border: none;
-    border-radius: 0.5rem;
-    background: var(--color-primary);
-    color: var(--label-text);
-    font-weight: 600;
-    cursor: pointer;
-    &:hover, &:focus {
-      background-color: var(--color-accent);
-    }
   }
 
   .grid {

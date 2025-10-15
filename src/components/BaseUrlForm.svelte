@@ -11,8 +11,8 @@
   };
 </script>
 
-<form class="base-url-form" on:submit={handleSubmit}>
-  <label class="form-label" for="base-url-input">Base image URL</label>
+<form class="card padding-lg base-url-form bg-tint rounded-md" on:submit={handleSubmit}>
+  <label class="form-label" for="base-url-input">Paste a full Contentful Asset URL</label>
   <div class="form-controls">
     <input
       id="base-url-input"
@@ -30,9 +30,9 @@
   .base-url-form {
     display: grid;
     gap: 0.5rem;
-    width: min(100%, 50ch);
-    margin: 0 auto;
-    text-align: left;
+    width: min(100%, 70ch);
+    /* margin: 0 auto; */
+    /* text-align: left; */
   }
 
   .form-label {
@@ -48,7 +48,7 @@
   .url-input {
     flex: 1;
     padding: 0.65rem 0.75rem;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-primary);
     border-radius: 0.5rem;
     font-size: 0.9rem;
     font-family: monospace;

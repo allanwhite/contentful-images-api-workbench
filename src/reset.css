@@ -1,7 +1,7 @@
 html {
     color-scheme: light dark;
     font:
-        clamp(1rem, 1rem + 0.3vw, 2rem) / 1.4 system-ui,
+        clamp(1rem, 0.8rem + 0.3vw, 2rem) / 1.4 system-ui,
         sans-serif;
     tab-size: 2;
     hanging-punctuation: first allow-end last;

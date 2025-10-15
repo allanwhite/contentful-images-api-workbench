@@ -52,9 +52,9 @@
         </nav>
   <header class="page-header">
     <div class="title">
-        <h1 class="">Contentful Images API Variations</h1>
+      <h1 class="">Contentful Images API Variations</h1>
+      <p>These images are already delivered with the <a href='https://www.contentful.com/developers/docs/references/images-api/'>Contentful Image API</a>, so we can easily optimize them to save bandwidth with a few appropriate parameters. 🔍 You can click to zoom on the images to inspect their visual quality.</p>
     </div>
-    <p>These images are already delivered with the <a href='https://www.contentful.com/developers/docs/references/images-api/'>Contentful Image API</a>, so we can easily optimize them to save bandwidth with a few appropriate parameters.</p>
     <BaseUrlForm bind:value={imageUrlInput} on:submit={handleUrlSubmit} />
   </header>
 

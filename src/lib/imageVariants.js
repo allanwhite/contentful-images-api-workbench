@@ -1,20 +1,20 @@
 export const variationPresets = [
-  { label: 'Original', params: '?w=1000', notes: 'Image ©Copyright R. Allan White 2025', xtraClasses: '' },
+  { label: 'Original', params: '', notes: 'Original image format', xtraClasses: '' },
   {
     label: 'Scaled WebP',
-    params: '?w=600&fm=webp&q=50',
+    params: '?w=800&fm=webp&q=70',
     notes: 'WebP has robust browser support.',
     xtraClasses: ''
   },
   {
-    label: 'AVIF',
-    params: '?w=600&fm=avif&q=50',
+    label: 'Scaled AVIF',
+    params: '?w=800&fm=avif&q=50',
     notes: 'AVIF tends to be about 10-15% smaller than WebP, with slightly less browser support.',
     xtraClasses: ''
   },
   {
     label: 'LQIP Preview',
-    params: '?q=1&w=100&fm=webp',
+    params: '?q=1&w=40&fm=webp',
     notes: 'LQIP (low-quality preview image) version. A CSS Blur(30px) filter has been applied.',
     xtraClasses: 'loading-blur loading-fill'
   },

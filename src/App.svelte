@@ -88,7 +88,7 @@
         </nav>
   <header class="page-header">
     <div class="title">
-      <h1 class="">Contentful Images API Variations</h1>
+      <h1>Contentful Images API Variations</h1>
       <p>These images are already delivered with the <a href='https://www.contentful.com/developers/docs/references/images-api/'>Contentful Image API</a>, so we can easily optimize them to save bandwidth with a few appropriate parameters. 🔍 You can click to zoom on the images to inspect their visual quality.</p>
     </div>
     <div class="form-and-samples">
@@ -123,7 +123,6 @@
       <ImageVariantCard {entry} />
     {/each}
     <article class="card pad-lg">
-      <!-- <div class="card-body"> -->
         <h3>Images API Overview</h3>
         <p>
           Here's a <a href="https://www.contentful.com/blog/creator-guide-to-image-file-formats-and-why-they-are-important/">blog post</a> that describes working with the Images API.
@@ -131,7 +130,6 @@
         <p class="">
           Watch this for a solid walkthrough of how to tune images with the Contentful Image API.
         </p>
-        <!-- svelte-ignore a11y-missing-attribute -->
         <iframe
           class="aspect-video"
           width="560"
@@ -139,9 +137,9 @@
           src="https://www.youtube.com/embed/DIWWCAJOkbU"
           frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          title="Contentful Images API walkthrough video"
           allowfullscreen
         ></iframe>
-      <!-- </div> -->
     </article>
   </section>
 </main>

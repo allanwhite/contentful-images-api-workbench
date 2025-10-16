@@ -98,7 +98,7 @@
   </div>
 
   <div
-    class="image-wrapper loader"
+    class="image-wrapper"
     role="button"
     tabindex="0"
     aria-pressed={zoomed}

@@ -21,7 +21,7 @@
   };
 </script>
 
-<form class="card padding-lg base-url-form bg-tint rounded-md" on:submit={handleSubmit}>
+<form class="card pad-lg base-url-form bg-tint rounded-md" on:submit={handleSubmit}>
   <label class="form-label" for="base-url-input">Paste a full Contentful Asset URL</label>
   <div class="form-controls">
     <div class="thumbnail" class:thumbnail-empty={!showThumbnail || !thumbnailUrl}>

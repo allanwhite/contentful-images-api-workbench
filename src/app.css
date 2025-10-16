@@ -63,11 +63,14 @@
     margin-bottom: calc(var(--pad-md) * 1.5);
   }
    */
-  .padding-md {
+  .pad-md {
     padding: var(--pad-md);
   }
-  .padding-lg {
+  .pad-lg {
     padding: var(--pad-lg);
+  }
+  .pad-xl {
+    padding: calc(var(--pad-lg) * 2);
   }
    .aspect-video {
     aspect-ratio: 16 / 9;
@@ -101,6 +104,13 @@
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--label-color);
+  }
+  .icon {
+    width: 1em;
+    height: 1em;
+    /* display: inline-block; */
+    vertical-align: middle;
+    fill: currentColor;
   }
 }
 @layer {

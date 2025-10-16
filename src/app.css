@@ -11,8 +11,6 @@
     }
     --light-base: oklch(94.611% 0.00011 271.152);
     --dark-base: oklch(19.706% 0.00598 285.792);
-    /* --light-tint: color-mix(in srgb, var(--light-base) 90%, transparent);
-    --dark-tint: color-mix(in srgb, var(--dark-base) 90%, transparent); */
     --light-tint: white;
     --dark-tint: black;
     --background: light-dark(var(--light-base), var(--dark-base));
@@ -33,12 +31,6 @@
   }
 }
 @layer utilities {
-  .float-left {
-    float: left;
-  }
-  .float-right {
-    float: right;
-  }
   .loading-blur {
     filter: blur(25px);
     min-width: 400px;
@@ -56,13 +48,6 @@
   .mono {
     font-family: ui-monospace, SFMono-Regular, monospace;
   }
-  /* .loader {
-    background-image: linear-gradient(135deg, #7c7c7c98 2.42%, rgba(124, 124, 124, 0.00) 75%);
-  } */
-  /* .mb-md {
-    margin-bottom: calc(var(--pad-md) * 1.5);
-  }
-   */
   .pad-md {
     padding: var(--pad-md);
   }
@@ -108,7 +93,6 @@
   .icon {
     width: 1em;
     height: 1em;
-    /* display: inline-block; */
     vertical-align: middle;
     fill: currentColor;
   }
@@ -142,7 +126,8 @@
   }
   .nav-group {
     position: relative;
-    margin: var(--pad-md); margin-bottom: 0;
+    margin: var(--pad-md);
+    margin-bottom: 0;
     display: block;
     @media (min-width: 960px) {
       position: absolute;
@@ -154,9 +139,7 @@
     }
   }
   .page-header {
-    /* text-align: center; */
     padding: var(--pad-lg);
-    /* margin-bottom: var(--pad-xl); */
     display: grid;
     gap: 1.5rem;
     place-items: start;
@@ -184,13 +167,6 @@
     padding: var(--pad-md);
   }
 
-  /* .sample-title {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: color-mix(in srgb, var(--text) 80%, transparent);
-  } */
-
   .sample-thumbs {
     display: flex;
     gap: 0.5rem;
@@ -199,21 +175,24 @@
   }
 
   .sample-thumb {
+    --sample-outline: inset 0 0 0 0 transparent;
     width: 5rem;
     height: 5rem;
     padding: 0;
-    border: 5px solid light-dark(var(--light-base), var(--dark-base));
+    border: none;
     border-radius: var(--radius-md);
     cursor: pointer;
     overflow: hidden;
-    transition: all var(--transition-speed-fast) linear;
+    box-shadow: var(--sample-outline);
+    transition: box-shadow var(--transition-speed-fast) ease, transform var(--transition-speed-fast) ease;
   }
 
   .sample-thumb:hover,
   .sample-thumb:focus-visible,
   .sample-thumb.selected {
-    border-color: var(--color-primary);
+    --sample-outline: inset 0 0 0 3px var(--color-primary);
     outline: none;
+    transform: translateY(-1px);
   }
 
   .sample-thumb img {

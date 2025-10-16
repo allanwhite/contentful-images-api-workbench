@@ -42,18 +42,25 @@
     }
   }
 
-  function handleUrlSubmit(event) {
-    const trimmed = event.detail.value.trim();
+  function setImageUrl(nextUrl, { updateInput = true } = {}) {
+    const trimmed = nextUrl.trim();
     if (!trimmed) {
       return;
     }
 
-    thumbnailVisible = true;
     if (trimmed !== baseImageUrl) {
       baseImageUrl = trimmed;
     }
 
-    imageUrlInput = trimmed;
+    if (updateInput) {
+      imageUrlInput = trimmed;
+    }
+
+    thumbnailVisible = true;
+  }
+
+  function handleUrlSubmit(event) {
+    setImageUrl(event.detail.value);
   }
 
   function handleThumbnailClear() {
@@ -64,17 +71,7 @@
   $: void updateEntries(baseImageUrl);
 
   function handleSampleSelect(url) {
-    const trimmed = url.trim();
-    if (!trimmed) {
-      return;
-    }
-
-    thumbnailVisible = true;
-    if (trimmed !== baseImageUrl) {
-      baseImageUrl = trimmed;
-    }
-
-    imageUrlInput = trimmed;
+    setImageUrl(url);
   }
 
 </script>

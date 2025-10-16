@@ -1,78 +1,70 @@
 <script>
   import { onMount } from 'svelte';
 
-  const modes = ['auto', 'light', 'dark'];
-  const storageKey = 'themeMode';
-
-  let mode = 'auto';
-  let prefersDark = false;
-
-  const modeLabels = {
+  const MODES = ['auto', 'light', 'dark'];
+  const STORAGE_KEY = 'themeMode';
+  const MODE_LABELS = {
     auto: 'Theme: Auto (system default)',
     light: 'Theme: Light',
     dark: 'Theme: Dark'
   };
 
-  const modeIcons = {
-    auto: 'Auto',
-    light: 'Light',
-    dark: 'Dark'
-  };
+  let mode = 'auto';
+  let activeMode = 'light';
+  let mediaQuery;
 
   onMount(() => {
-    prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)')?.matches ?? false;
-    window.matchMedia?.('(prefers-color-scheme: dark)')?.addEventListener('change', handleSystemChange);
+    mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    updateActiveMode();
+    mediaQuery.addEventListener('change', handleSystemChange);
 
-    const stored = localStorage.getItem(storageKey);
-    if (stored && modes.includes(stored)) {
-      setMode(stored);
-    } else {
-      setMode('auto');
-    }
+    const stored = localStorage.getItem(STORAGE_KEY);
+    setMode(MODES.includes(stored) ? stored : 'auto');
 
     return () => {
-      window.matchMedia?.('(prefers-color-scheme: dark)')?.removeEventListener('change', handleSystemChange);
+      mediaQuery?.removeEventListener('change', handleSystemChange);
     };
   });
 
-  function handleSystemChange(event) {
-    prefersDark = event.matches;
+  function handleSystemChange() {
+    updateActiveMode();
     if (mode === 'auto') {
       applyTheme('auto');
     }
   }
 
+  function updateActiveMode() {
+    const prefersDark = mediaQuery?.matches ?? false;
+    activeMode = mode === 'auto' ? (prefersDark ? 'dark' : 'light') : mode;
+  }
+
   function setMode(nextMode) {
     mode = nextMode;
     applyTheme(nextMode);
+    updateActiveMode();
   }
 
   function applyTheme(currentMode) {
     const root = document.documentElement;
-    if (!root) {
-      return;
-    }
+    if (!root) return;
 
     if (currentMode === 'auto') {
       root.removeAttribute('data-color-scheme');
       root.style.setProperty('color-scheme', 'light dark');
-      localStorage.removeItem(storageKey);
+      localStorage.removeItem(STORAGE_KEY);
       return;
     }
 
     root.setAttribute('data-color-scheme', currentMode);
     root.style.setProperty('color-scheme', currentMode);
-    localStorage.setItem(storageKey, currentMode);
+    localStorage.setItem(STORAGE_KEY, currentMode);
   }
 
   function cycleMode() {
-    const currentIndex = modes.indexOf(mode);
-    const nextMode = modes[(currentIndex + 1) % modes.length];
+    const currentIndex = MODES.indexOf(mode);
+    const nextMode = MODES[(currentIndex + 1) % MODES.length];
     setMode(nextMode);
   }
-
-  $: activeMode = mode === 'auto' ? (prefersDark ? 'dark' : 'light') : mode;
-  $: indicatorPosition = mode === 'auto' ? 'auto' : mode;
 </script>
 
 <button
@@ -80,8 +72,8 @@
   type="button"
   on:click={cycleMode}
   aria-pressed={mode !== 'auto'}
-  aria-label={modeLabels[mode]}
-  title={`${modeIcons[mode]} mode`}
+  aria-label={MODE_LABELS[mode]}
+  title={MODE_LABELS[mode]}
   data-mode={mode}
   data-active={activeMode}
 >

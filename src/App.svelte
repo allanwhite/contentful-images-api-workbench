@@ -5,6 +5,7 @@
   import ThemeToggle from './components/ThemeToggle.svelte';
   import { buildVariantEntries, hydrateVariantSizes } from './lib/imageVariants.js';
 
+  // Sample assets surfaced alongside the form; each entry should include metadata once expanded.
   const sampleImages = [
     'https://images.ctfassets.net/col7w9urljg1/121xYOJZwECsMsUxRFgKBC/af95ad09a6b2f974dca2c07ca2f552de/Fiona_at_Edgefield__sunset_02.jpg',
     'https://images.ctfassets.net/col7w9urljg1/4KLYjZa69Q53hbNyKVydbf/828c7d82f9d789c80c1491ddd816634e/pantone-pdp-desktop.jpg',
@@ -42,6 +43,7 @@
     }
   }
 
+  // Centralised setter so form submissions, samples, and future integrations stay in sync.
   function setImageUrl(nextUrl, { updateInput = true } = {}) {
     const trimmed = nextUrl.trim();
     if (!trimmed) {

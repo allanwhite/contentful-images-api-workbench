@@ -23,6 +23,7 @@
     resetTimer = undefined;
   }
 
+  // Delay collapse so users can inspect the zoomed area before it settles back.
   function scheduleReset(withPositionReset = true) {
     clearResetTimer();
     resetTimer = setTimeout(() => {

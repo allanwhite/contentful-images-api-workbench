@@ -175,24 +175,24 @@
   }
 
   .sample-thumb {
-    --sample-outline: inset 0 0 0 0 transparent;
+    /* --sample-outline: inset 0 0 0 0 transparent; */
     width: 5rem;
     height: 5rem;
     padding: 0;
-    border: none;
+    border: 5px solid light-dark(var(--light-base), var(--dark-base));
     border-radius: var(--radius-md);
     cursor: pointer;
     overflow: hidden;
-    box-shadow: var(--sample-outline);
-    transition: box-shadow var(--transition-speed-fast) ease, transform var(--transition-speed-fast) ease;
+    transition: all var(--transition-speed-fast) linear;
   }
 
   .sample-thumb:hover,
   .sample-thumb:focus-visible,
   .sample-thumb.selected {
-    --sample-outline: inset 0 0 0 3px var(--color-primary);
+    /* --sample-outline: inset 0 0 0 3px var(--color-primary); */
+    border-color: var(--color-primary);
     outline: none;
-    transform: translateY(-1px);
+    /* transform: translateY(-1px); */
   }
 
   .sample-thumb img {

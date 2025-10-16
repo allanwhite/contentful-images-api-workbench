@@ -1,16 +1,15 @@
 <script>
+  const ZOOM_SCALE = 3;
+  const ZOOM_OUT_DELAY = 220;
+  const RESET_DELAY = 300;
+
   export let entry;
 
   let transformOrigin = '50% 50%';
   let zoomed = false;
   let resetTimer;
-  let originResetTimer;
 
   function positionToOrigin(event) {
-    if (!('clientX' in event) || !('clientY' in event)) {
-      transformOrigin = '50% 50%';
-      return;
-    }
     const wrapper = event.currentTarget;
     const rect = wrapper.getBoundingClientRect();
     const x = ((event.clientX - rect.left) / rect.width) * 100;
@@ -19,26 +18,20 @@
   }
 
   function clearResetTimer() {
-    if (resetTimer) {
-      clearTimeout(resetTimer);
-      resetTimer = undefined;
-    }
-    if (originResetTimer) {
-      clearTimeout(originResetTimer);
-      originResetTimer = undefined;
-    }
+    if (!resetTimer) return;
+    clearTimeout(resetTimer);
+    resetTimer = undefined;
   }
 
-  function scheduleReset() {
+  function scheduleReset(withPositionReset = true) {
     clearResetTimer();
     resetTimer = setTimeout(() => {
       zoomed = false;
-      originResetTimer = setTimeout(() => {
+      if (withPositionReset) {
         transformOrigin = '50% 50%';
-        originResetTimer = undefined;
-      }, 220);
+      }
       resetTimer = undefined;
-    }, 300);
+    }, RESET_DELAY + ZOOM_OUT_DELAY);
   }
 
   function handlePointerMove(event) {
@@ -48,13 +41,12 @@
 
   function toggleZoom(event) {
     clearResetTimer();
-    positionToOrigin(event);
+    if ('clientX' in event && 'clientY' in event) {
+      positionToOrigin(event);
+    }
     zoomed = !zoomed;
     if (!zoomed) {
-      originResetTimer = setTimeout(() => {
-        transformOrigin = '50% 50%';
-        originResetTimer = undefined;
-      }, 220);
+      scheduleReset(false);
     }
   }
 
@@ -70,6 +62,7 @@
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       toggleZoom(event);
+      return;
     }
     if (event.key === 'Escape') {
       scheduleReset();
@@ -110,7 +103,7 @@
     aria-pressed={zoomed}
     class:zoomed
     on:pointermove={handlePointerMove}
-    on:pointerdown={toggleZoom}
+    on:click={toggleZoom}
     on:pointerleave={handlePointerLeave}
     on:pointerenter={clearResetTimer}
     on:focus={clearResetTimer}
@@ -210,8 +203,8 @@
   }
 
   .image-wrapper.zoomed .preview {
-    transform: scale(3);
-    transition-delay: 300ms;
+    transform: scale(var(--zoom-scale, 3));
+    /* transition-delay: var(--zoom-delay, 300ms); */
   }
 
   .image-wrapper .image-avatar{

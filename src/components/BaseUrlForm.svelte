@@ -1,13 +1,10 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import { fade } from 'svelte/transition';
 
   export let value = '';
   export let thumbnailUrl = '';
   export let thumbnailAlt = 'Current image thumbnail';
   export let showThumbnail = false;
-
-  const FAST_DURATION = 100;
 
   const dispatch = createEventDispatcher();
 
@@ -24,7 +21,12 @@
 <form class="card pad-lg base-url-form bg-tint rounded-md" on:submit={handleSubmit}>
   <label class="form-label" for="base-url-input">Paste a full Contentful Asset URL</label>
   <div class="form-controls">
-    <div class="thumbnail" class:thumbnail-empty={!showThumbnail || !thumbnailUrl}>
+    <div
+      class="thumbnail"
+      class:thumbnail-empty={!showThumbnail || !thumbnailUrl}
+      role="img"
+      aria-label={showThumbnail && thumbnailUrl ? thumbnailAlt : 'No thumbnail selected'}
+    >
       {#if showThumbnail && thumbnailUrl}
         <img class="thumbnail-image" src={thumbnailUrl} alt={thumbnailAlt} loading="lazy" />
         <button
@@ -37,14 +39,13 @@
             <path d="M12.3 3.7a1 1 0 0 0-1.4-1.4L8 5.17 5.1 2.3A1 1 0 1 0 3.7 3.7L6.58 6.6 3.7 9.5a1 1 0 1 0 1.41 1.41L8 8l2.89 2.91a1 1 0 0 0 1.41-1.41L9.42 6.6z" />
           </svg>
         </button>
-
       {/if}
     </div>
     <input
       id="base-url-input"
       class="url-input"
       type="url"
-      placeholder="Image URL..."
+      placeholder="Contentful Image Asset URL..."
       bind:value
       required
     />
@@ -126,13 +127,6 @@
     height: 14px;
     fill: currentColor;
   }
-
-  /* .thumbnail-placeholder {
-    width: 50%;
-    height: 50%;
-    border-radius: var(--radius-sm);
-    border: 1px dashed color-mix(in srgb, var(--color-primary) 35%, transparent);
-  } */
 
   .url-input {
     flex: 1;

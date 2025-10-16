@@ -5,6 +5,7 @@
   import ThemeToggle from './components/ThemeToggle.svelte';
   import { buildVariantEntries, hydrateVariantSizes } from './lib/imageVariants.js';
 
+  // Sample assets surfaced alongside the form; each entry should include metadata once expanded.
   const sampleImages = [
     'https://images.ctfassets.net/col7w9urljg1/121xYOJZwECsMsUxRFgKBC/af95ad09a6b2f974dca2c07ca2f552de/Fiona_at_Edgefield__sunset_02.jpg',
     'https://images.ctfassets.net/col7w9urljg1/4KLYjZa69Q53hbNyKVydbf/828c7d82f9d789c80c1491ddd816634e/pantone-pdp-desktop.jpg',
@@ -42,18 +43,26 @@
     }
   }
 
-  function handleUrlSubmit(event) {
-    const trimmed = event.detail.value.trim();
+  // Centralised setter so form submissions, samples, and future integrations stay in sync.
+  function setImageUrl(nextUrl, { updateInput = true } = {}) {
+    const trimmed = nextUrl.trim();
     if (!trimmed) {
       return;
     }
 
-    thumbnailVisible = true;
     if (trimmed !== baseImageUrl) {
       baseImageUrl = trimmed;
     }
 
-    imageUrlInput = trimmed;
+    if (updateInput) {
+      imageUrlInput = trimmed;
+    }
+
+    thumbnailVisible = true;
+  }
+
+  function handleUrlSubmit(event) {
+    setImageUrl(event.detail.value);
   }
 
   function handleThumbnailClear() {
@@ -64,17 +73,7 @@
   $: void updateEntries(baseImageUrl);
 
   function handleSampleSelect(url) {
-    const trimmed = url.trim();
-    if (!trimmed) {
-      return;
-    }
-
-    thumbnailVisible = true;
-    if (trimmed !== baseImageUrl) {
-      baseImageUrl = trimmed;
-    }
-
-    imageUrlInput = trimmed;
+    setImageUrl(url);
   }
 
 </script>
@@ -89,7 +88,7 @@
         </nav>
   <header class="page-header">
     <div class="title">
-      <h1 class="">Contentful Images API Variations</h1>
+      <h1>Contentful Images API Variations</h1>
       <p>These images are already delivered with the <a href='https://www.contentful.com/developers/docs/references/images-api/'>Contentful Image API</a>, so we can easily optimize them to save bandwidth with a few appropriate parameters. 🔍 You can click to zoom on the images to inspect their visual quality.</p>
     </div>
     <div class="form-and-samples">
@@ -124,7 +123,6 @@
       <ImageVariantCard {entry} />
     {/each}
     <article class="card pad-lg">
-      <!-- <div class="card-body"> -->
         <h3>Images API Overview</h3>
         <p>
           Here's a <a href="https://www.contentful.com/blog/creator-guide-to-image-file-formats-and-why-they-are-important/">blog post</a> that describes working with the Images API.
@@ -132,7 +130,6 @@
         <p class="">
           Watch this for a solid walkthrough of how to tune images with the Contentful Image API.
         </p>
-        <!-- svelte-ignore a11y-missing-attribute -->
         <iframe
           class="aspect-video"
           width="560"
@@ -140,9 +137,9 @@
           src="https://www.youtube.com/embed/DIWWCAJOkbU"
           frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          title="Contentful Images API walkthrough video"
           allowfullscreen
         ></iframe>
-      <!-- </div> -->
     </article>
   </section>
 </main>
